@@ -1,4 +1,4 @@
-# river_measurer
+# Lunometer
 
 Uses the government's API (documented [here](https://environment.data.gov.uk/flood-monitoring/doc/reference)) to measure the River Lune.
 
