@@ -25,8 +25,8 @@ def get_json_data(json_url):
 #convert to csv
 def convert_to_csv(output_file, data):
     """
-    Converts government data to a csv file (headers = ['dateTime', 'value'], 
-    assumes path doesn"t exist already.
+    Converts government data to a csv file (headers = ['dateTime', 'value'].
+    Attemps to prevent duplicates.
     """
     #used twice
     fieldnames = ["dateTime", "value"]
