@@ -28,16 +28,39 @@ def convert_to_csv(output_file, data):
     Converts government data to a csv file (headers = ['dateTime', 'value'], 
     assumes path doesn"t exist already.
     """
+    #used twice
+    fieldnames = ["dateTime", "value"]
+
+
+    # double checks and appends existing data
+    if os.path.exists(output_file): 
+        with open(output_file, mode='r') as csv_file:
+            existing_data = list(csv.DictReader(csv_file))
+            #its a list of dicts, not a dict
+            print(existing_data)
+            print(type(existing_data))
+
+            #check
+            line_count = 0
+            for erow in existing_data:
+                if line_count == 0:
+                    continue
+                    #purge clones
+                for drow in data["items"]:
+                    if erow[fieldnames[0]] == drow[fieldnames[0]]:
+                        existing_data.pop(line_count)                         
+                #remaining data
+                data["items"].append(erow)
+                
+
     with open(output_file, mode="w") as csv_file:
         #prep work
-        fieldnames = ["dateTime", "value"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
 
         #hard work
         writer.writerows(data["items"])
-
-            
+      
     
 def main():              
     data = get_json_data("https://environment.data.gov.uk/flood-monitoring/id"
