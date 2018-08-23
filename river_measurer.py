@@ -66,7 +66,7 @@ def main():
     try:            
         data = get_json_data("https://environment.data.gov.uk/flood-monitoring/id"
         + "/measures/724629-level-stage-i-15_min-m/readings?_sorted&_limit=500")
-        convert_tof_csv("caton_readings.csv", data)
+        convert_to_csv("caton_readings.csv", data)
         print("Finished.")
     except Exception as e:
         print("An error occurred; it is described below.")
